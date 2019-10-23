@@ -1,6 +1,7 @@
 class BlogsController < ApplicationController
 
 
+
     before_action :set_blog, only: [:show, :edit, :update, :destroy]
 
     def index
@@ -41,7 +42,22 @@ class BlogsController < ApplicationController
       end
     end
 
-    private
+    
+  
+
+  def new
+    @blog = Blog.new
+  end
+
+  def create
+   @blog = Blog.create(params[:blog])
+   if @blog.save
+     redirect_to blogs_path, notice: "ブログを作成しました！"
+   else
+     render :new
+   end
+  
+  private
     def set_blog
       @blog = blog.find(params[:id])
     end
@@ -49,4 +65,4 @@ class BlogsController < ApplicationController
     def blog_params
       params.require(:blog).permit(:title, :content, :user_id)
     end
-  end
+end 
