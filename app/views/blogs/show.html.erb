@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @blog.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @blog.content %>
+</p>
+
+
+  <button type="button" class="btn btn-default">
+    <%= link_to 'Edit', edit_blog_path(@blog) %></button>
+
+  <button type="button" class="btn btn-default">
+    <%= link_to 'Back', blogs_path %></button>
