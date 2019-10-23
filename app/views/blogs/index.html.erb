@@ -8,16 +8,16 @@
   <thead class="container">
     <tr class="row">
       <th class="col-md-4">title</th>
-      <th class="col-md-3">content/th>
+      <th class="col-md-3">content</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody class="container">
     <% @blogs.each do |blog| %>
-      <tr class="row well well-lg">
-        <td class="col-md-4 alert-danger"><%= blog.title %></td>
-        <td class="col-md-1.75 alert-info"><%= blog.content %></td>
+      <tr >
+        <td ><%= blog.title %></td>
+        <td ><%= blog.content %></td>
         <td>
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-default">
@@ -26,18 +26,16 @@
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-default">
               <%= link_to '編集', edit_blog_path(blog) %></button>
-          <% else %>
+
           <% end %>
 
-          <% if blog.user_id == current_user.id %>
           <div class="btn-group" role="group">
             <button type="button" class="btn btn-default">
-              <%= link_to '削除', blog, method: :delete, data: { confirm: 'Are you sure?' } %></button>
-          <% else %>
-          <% end %>
+              <%= link_to '削除', @blog.id, method: :delete %></button>
+
 
         </td>
       </tr>
-    <% end %>
+
   </tbody>
 </table>

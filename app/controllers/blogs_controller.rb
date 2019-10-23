@@ -5,7 +5,7 @@ class BlogsController < ApplicationController
     before_action :set_blog, only: [:show, :edit, :update, :destroy]
 
     def index
-      @blogs = blog.all
+      @blogs = Blog.all
     end
 
     def show
@@ -13,12 +13,8 @@ class BlogsController < ApplicationController
 
 
     def edit
-      if @blog.user_id == current_user.id
-      else
-        redirect_to blogs_path
-         flash[:again] = '権限がありません。'
-      end
     end
+
 
     def update
         respond_to do |format|
@@ -33,36 +29,32 @@ class BlogsController < ApplicationController
       end
 
     def destroy
-      if @blog.user_id == current_user.id
         @blog.destroy
         redirect_to blogs_path
-      else
-        redirect_to blogs_path
-         flash[:again] = '権限がありません。'
       end
-    end
 
-    
-  
+
+
 
   def new
     @blog = Blog.new
   end
 
   def create
-   @blog = Blog.create(params[:blog])
+   @blog = Blog.new(blog_params)
    if @blog.save
      redirect_to blogs_path, notice: "ブログを作成しました！"
    else
      render :new
    end
-  
+ end
+
   private
     def set_blog
-      @blog = blog.find(params[:id])
+      @blog = Blog.find(params[:id])
     end
 
     def blog_params
-      params.require(:blog).permit(:title, :content, :user_id)
+      params.require(:blog).permit(:title, :content)
     end
-end 
+end
